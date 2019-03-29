@@ -1,0 +1,50 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+    <mat-toolbar fxLayout="column" style="margin-bottom: 70px;">
+      <img src="assets/img/arthuro.jpg" alt="" height="64" width="64" style="border-radius: 60px;">
+      <h1>Alonso R.</h1>
+    </mat-toolbar>
+    <mat-divider [vertical]="false"></mat-divider>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/home" routerLinkActive="active" ><mat-icon matSuffix>home</mat-icon>Home</a>
+      <a mat-list-item routerLink="/search" routerLinkActive="active" ><mat-icon matSuffix>youtube_searched_for</mat-icon> Browse</a>
+      <mat-divider [vertical]="false"></mat-divider>
+      <a mat-list-item routerLink="/browser" routerLinkActive="active"><mat-icon matSuffix>album</mat-icon> Albums</a>
+      <a mat-list-item routerLink=""><mat-icon matSuffix>group</mat-icon> Artists</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="titlebar mat-elevation-z8">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div style="display: flex; flex-direction: row; align-items: center; font-family: 'Montserrat', sans-serif!important; font-weight: 700; font-size: 24px;">
+        <img src="./assets/img/banner-ico.png" alt="" height="40" width="40">
+        <p>{{title}}</p>
+      </div>
+      <span class="spacer"></span>
+      <div class="search-container">
+        <mat-form-field appearance="outline" color="accent" class="my-form-field">
+          <mat-label>Search</mat-label>
+          <mat-icon matSuffix>search</mat-icon>
+          <input matInput placeholder="Search songs, artist, ...." >
+        </mat-form-field>
+      </div>
+      <!--
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+      -->
+    </mat-toolbar>
+    <ng-content></ng-content>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

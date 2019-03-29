@@ -1,0 +1,43 @@
+.container {
+    padding: 20px;
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.container-card {
+    margin: 1%;
+}
+
+.searchbox mat-form-field {
+    width: 75%;
+    padding-left: 45px;
+}
+
+.header{
+    padding: 20px;
+}
+  
+.example-card{
+    margin: 1%;
+}
+.example-header-image {
+background-size: cover;
+}
+
+.example-header-image img {
+    border-radius: 60px;
+}
+
+mat-card-title a{
+    text-decoration: none;
+    color: white;
+}
+
+mat-chip a {
+    text-decoration: none;
+    color: white;
+}
+
+mat-chip:hover{
+    cursor: pointer;
+}

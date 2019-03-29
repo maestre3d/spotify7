@@ -1,0 +1,54 @@
+<div class="container animated fadeIn fast">
+  <h1 style="padding: 25px;">Browse in Spotify</h1>
+  <div class="searchbox">
+    <mat-form-field appearance="legacy">
+      <mat-label>Search</mat-label>
+      <!-- (keyup)="applyFilter($event.target.value)" -->
+      <input matInput placeholder="Search for artist..." [(ngModel)]="model" (ngModelChange)='changed($event)' >
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <mat-divider></mat-divider>
+</div>
+
+<div *ngIf="!found" style="text-align:center; justify-content:center;" class="animated fadeIn fast">
+  <h1><b>No results found.</b></h1>
+</div>
+
+<app-loading *ngIf="loaded"></app-loading>
+
+<div class="container-card animated fadeIn slow"
+fxLayout="row wrap" 
+fxLayout.lt-sm="column" 
+fxLayoutGap="24px" 
+fxLayoutAlign="flex-start"
+*ngIf="artists.length > 0 && loaded === false">
+
+  <ng-container *ngFor="let artist of artists">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+            <img [src]="artist.images | noimage" alt="" height="48" width="48">
+          </div>
+          <mat-card-title><a [href]="artist.external_urls.spotify">{{ artist.name }}</a></mat-card-title>
+          <mat-card-subtitle>Followers: {{ artist.followers.total }}</mat-card-subtitle>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <mat-chip-list aria-label="Artist" *ngIf="artist.genres.length > 0">
+            <ng-template ngFor let-genre [ngForOf]="artist.genres" let-i="index">
+                <mat-chip *ngIf="i < 3">{{ genre }}</mat-chip>
+            </ng-template>
+          </mat-chip-list>
+          <mat-chip-list aria-label="Artist" *ngIf="artist.genres.length == 0">
+            <mat-chip>N/a</mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="openSnackBar(artist.name)"><mat-icon>person_add</mat-icon>Follow</button>
+          <button mat-raised-button><mat-icon>share</mat-icon> SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+  </ng-container>
+</div>

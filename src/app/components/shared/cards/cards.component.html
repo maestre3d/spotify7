@@ -1,0 +1,32 @@
+<div class="container animated fadeIn slower"
+fxLayout="row wrap" 
+fxLayout.lt-sm="column" 
+fxLayoutGap="24px" 
+fxLayoutAlign="flex-start">
+
+  <ng-container *ngFor="let item of items">
+    <mat-card class="example-card"
+    fxFlex.lt-md="0 1 calc(50% - 32px)"
+    fxFlex.lt-sm="100%"
+    >
+
+      <mat-card-header>
+        <!--<div mat-card-avatar class="example-header-image"><img [src]="" alt=""></div>-->
+        <mat-card-title>{{ item.name }}</mat-card-title>
+        <mat-card-subtitle><a [href]="item.artists[0].external_urls.spotify">{{item.artists[0].name}}</a></mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="item.images[0].url" alt="Album pic">
+      <mat-card-content>
+        <mat-chip-list aria-label="Artist">
+          <mat-chip *ngFor="let artist of item.artists"><a [href]="artist.external_urls.spotify">{{ artist.name }}</a></mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <a [href]="item.uri | safeUrl"><button mat-raised-button color="primary"><mat-icon>play_arrow</mat-icon>PLAY</button></a>
+        <button mat-raised-button (click)="openSnackBar(item.name, item.artists[0].name, 'UNDO' )"><mat-icon>thumb_up_alt</mat-icon>LIKE</button>
+        <button mat-raised-button><mat-icon>share</mat-icon> SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>
